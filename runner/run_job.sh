@@ -6,7 +6,8 @@
 # Checks run in the foreground (balance, Drive read and write, git push, no session of the same name). If any fails,
 # nothing is started and no CU is spent. Then the supervisor detaches (nohup), so it outlives the agent and the
 # terminal; it posts "ack" at launch and "result" or "error" at the end, by itself.
-# Settings: runner/local.env (never committed), see runner/local.env.example.
+# Settings: runner/local.env (never committed), see runner/local.env.example. GPU_WAIT_MIN (default 180): how long
+# to keep retrying when no GPU of the requested kind is free.
 #
 # The VM stops itself: launch.py starts vm_guard.py on the VM, which unassigns the VM when the job ends, when
 # max_hours passes, or after 25 idle GPU minutes. This script also stops the VM when it sees the job finish. It only
@@ -128,7 +129,15 @@ if [ -n "${REPORT_ONLY:-}" ]; then
   exit 0
 fi
 
-limited 170 "$COLAB" new -s "$SESSION" --gpu "$GPU" >/dev/null 2>&1 || { say "could not create a $GPU session"; finish error "no $GPU VM available; nothing was spent"; exit 1; }
+# G4s are often all taken for a while (request 001, 9 Nov 20:14 UTC, failed on the first try). Wait for one, up to
+# GPU_WAIT_MIN minutes, trying every 5 minutes. Nothing is spent while waiting.
+waited=0
+until limited 170 "$COLAB" new -s "$SESSION" --gpu "$GPU" >/dev/null 2>&1; do
+  if [ $waited -ge "${GPU_WAIT_MIN:-180}" ]; then finish error "no $GPU VM free for $waited min; nothing was spent"; exit 1; fi
+  [ $waited = 0 ] && say "no $GPU free; retrying every 5 min for up to ${GPU_WAIT_MIN:-180} min"
+  sleep 300; waited=$((waited + 5))
+done
+[ $waited -gt 0 ] && say "got a $GPU after $waited min"
 start_job
 printf 'job: %s\nlaunched on Colab session %s (%s). The VM stops itself at the end or after %s h at most.\n' \
   "$name" "$SESSION" "$GPU" "$(python3 -c "import json;print(json.load(open('$job')).get('max_hours'))")" > "$state/ack.md"
