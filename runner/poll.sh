@@ -59,6 +59,8 @@ while true; do
       stop)
         target=$(field "$f" target)
         pkill -f "run_job.sh $target " 2>/dev/null
+        # A killed supervisor may leave a "colab new" child that still creates a VM; end it, then stop any VM it made.
+        pkill -f "new -s $SESSION" 2>/dev/null; sleep 20
         limited 60 "$COLAB" sessions 2>&1 | grep -q "\[$SESSION\]" && limited 60 "$COLAB" stop -s "$SESSION" >/dev/null 2>&1
         [ -d "runner/state/$target" ] && echo stopped > "runner/state/$target/status"
         reply "$id" status "Stopped request $target's supervisor; session $SESSION is $(limited 60 "$COLAB" sessions 2>&1 | grep -q "\[$SESSION\]" && echo 'STILL OPEN' || echo 'not running')."
