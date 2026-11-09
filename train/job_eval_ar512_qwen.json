@@ -1,0 +1,18 @@
+{
+  "log": "/content/job.log",
+  "drive": "cs787drive:CS787-Diffusion/eval/jobs/eval_ar512_qwen",
+  "fetch": [
+    [
+      "cs787drive:CS787-Diffusion/runs/qwen2.5-7b/ar-control/best",
+      "/content/adapters/qwen-ar"
+    ]
+  ],
+  "mirror": [
+    [
+      "/content/eval_out",
+      "cs787drive:CS787-Diffusion/eval/main"
+    ]
+  ],
+  "command": "python3 -m pip uninstall -y -q torchao; cd /content && python3 run_eval.py --arm parent:qwen --name qwen-parent --tasks gsm8k,humaneval --ar-tokens 512 --out /content/eval_out && python3 run_eval.py --arm ar:qwen:/content/adapters/qwen-ar --name qwen-ar-control --tasks gsm8k,humaneval --ar-tokens 512 --out /content/eval_out && echo ALLDONE",
+  "max_hours": 1
+}

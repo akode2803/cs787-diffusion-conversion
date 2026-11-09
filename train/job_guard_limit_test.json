@@ -1,0 +1,6 @@
+{
+  "log": "/content/job.log",
+  "drive": "cs787drive:CS787-Diffusion/eval/jobs/guard_limit_test",
+  "max_hours": 0.03,
+  "command": "sleep 3600; echo ALLDONE"
+}

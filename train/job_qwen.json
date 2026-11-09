@@ -1,0 +1,7 @@
+{
+  "log": "/content/job.log",
+  "persist": "/content/persist/ar_qwen",
+  "drive": "cs787drive:CS787-Diffusion/runs/qwen2.5-7b/ar-control",
+  "command": "python3 -m pip uninstall -y -q torchao; cd /content && python3 ar_control.py --model qwen --output-dir /content/ar_qwen --persist-dir /content/persist/ar_qwen --checkpoint-steps 2500 && echo ALLDONE",
+  "max_hours": 5
+}

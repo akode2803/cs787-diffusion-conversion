@@ -1,0 +1,6 @@
+{
+  "log": "/content/job.log",
+  "drive": "cs787drive:CS787-Diffusion/eval/jobs/guard_test",
+  "max_hours": 0.5,
+  "command": "nvidia-smi --query-gpu=name --format=csv,noheader; sleep 45; echo DONE guard test; echo ALLDONE"
+}

@@ -1,0 +1,18 @@
+{
+  "log": "/content/job.log",
+  "drive": "cs787drive:CS787-Diffusion/eval/jobs/eval_gap_single",
+  "fetch": [
+    [
+      "cs787drive:CS787-Diffusion/runs/qwen2.5-7b/byod-retrained/best",
+      "/content/adapters/qwen-byod-retrained"
+    ]
+  ],
+  "mirror": [
+    [
+      "/content/eval_out",
+      "cs787drive:CS787-Diffusion/eval/main"
+    ]
+  ],
+  "command": "python3 -m pip uninstall -y -q torchao; cd /content && python3 run_eval.py --arm byod:qwen:/content/adapters/qwen-byod-retrained --name qwen-byod-retrained --tasks he_single --gap x0.5 --out /content/eval_out && python3 run_eval.py --arm byod:qwen:/content/adapters/qwen-byod-retrained --name qwen-byod-retrained --tasks he_single --gap x1.5 --out /content/eval_out && python3 run_eval.py --arm byod:qwen:/content/adapters/qwen-byod-retrained --name qwen-byod-retrained --tasks he_single --gap x2 --out /content/eval_out && python3 run_eval.py --arm byod:qwen:hub:Ruurd/BYOD-Qwen2.5-7B --name qwen-byod-released --tasks he_single --gap x0.5 --out /content/eval_out && python3 run_eval.py --arm byod:qwen:hub:Ruurd/BYOD-Qwen2.5-7B --name qwen-byod-released --tasks he_single --gap x1.5 --out /content/eval_out && python3 run_eval.py --arm byod:qwen:hub:Ruurd/BYOD-Qwen2.5-7B --name qwen-byod-released --tasks he_single --gap x2 --out /content/eval_out && python3 run_eval.py --arm llada --name llada --tasks he_single --gap x0.5 --out /content/eval_out && python3 run_eval.py --arm llada --name llada --tasks he_single --gap x1.5 --out /content/eval_out && python3 run_eval.py --arm llada --name llada --tasks he_single --gap x2 --out /content/eval_out && echo ALLDONE",
+  "max_hours": 2.25
+}

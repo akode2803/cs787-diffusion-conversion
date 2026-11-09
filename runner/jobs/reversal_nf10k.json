@@ -1,0 +1,13 @@
+{
+  "about": "Reversal test, run 3: name-free training prompts, 10,000 updates per arm, Qwen pair. About 1.1 G4-hours (~11 CU), capped at 1.5 h (15 CU).",
+  "est_cu": 12,
+  "log": "/content/job.log",
+  "drive": "@DRIVE@/eval/jobs/eval_reversal_nf10k",
+  "fetch": [
+    ["@DRIVE@/runs/qwen2.5-7b/ar-control/best", "/content/adapters/qwen-ar"],
+    ["@DRIVE@/runs/qwen2.5-7b/byod-retrained/best", "/content/adapters/qwen-byod-retrained"]
+  ],
+  "mirror": [["/content/eval_out", "@DRIVE@/eval/reversal_nf10k/results"]],
+  "command": "python3 -m pip uninstall -y -q torchao; cd /content && DRIVE='@DRIVE@' UPDATES=10000 EPOCHS=40 TAG=nf10k FORMS=namefree SKIP_BASE=1 bash reversal_job.sh && echo ALLDONE",
+  "max_hours": 1.5
+}

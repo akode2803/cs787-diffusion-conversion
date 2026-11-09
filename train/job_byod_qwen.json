@@ -1,0 +1,7 @@
+{
+  "log": "/content/job.log",
+  "persist": "/content/persist/byod_qwen",
+  "drive": "cs787drive:CS787-Diffusion/runs/qwen2.5-7b/byod-retrained",
+  "command": "python3 -m pip uninstall -y -q torchao; cd /content && TQDM_MININTERVAL=60 python3 retrain.py --model qwen --output-dir /content/byod_qwen --persist-dir /content/persist/byod_qwen --checkpoint-steps 2500 && echo ALLDONE",
+  "max_hours": 5
+}

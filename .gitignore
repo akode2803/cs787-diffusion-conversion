@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.env
+.env*
+runner/local.env
+runner/state/
+train/lanes/*.log
+*.pt
+*.partial
+/CLAUDE.local.md
+/AGENTS.md

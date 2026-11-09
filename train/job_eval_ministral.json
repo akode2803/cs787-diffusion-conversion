@@ -1,0 +1,18 @@
+{
+  "log": "/content/job.log",
+  "drive": "cs787drive:CS787-Diffusion/eval/jobs/eval_ministral",
+  "fetch": [
+    [
+      "cs787drive:CS787-Diffusion/runs/ministral-8b/ar-control/best",
+      "/content/adapters/ministral-ar"
+    ]
+  ],
+  "mirror": [
+    [
+      "/content/eval_out",
+      "cs787drive:CS787-Diffusion/eval/main"
+    ]
+  ],
+  "command": "python3 -m pip uninstall -y -q torchao; cd /content && python3 run_eval.py --arm ar:ministral:/content/adapters/ministral-ar --name ministral-ar-control --tasks gsm8k,mmlu,arc_c,humaneval,mbpp,he_single,he_multi --out /content/eval_out && python3 run_eval.py --arm parent:ministral --name ministral-parent --tasks gsm8k,mmlu,arc_c,humaneval,mbpp,he_single,he_multi --out /content/eval_out && python3 run_eval.py --arm byod:ministral:hub:Ruurd/BYOD-Ministral-8B --name ministral-byod-released --tasks gsm8k,mmlu,arc_c,humaneval,mbpp,he_single,he_multi --out /content/eval_out && python3 run_eval.py --arm parent:ministral --name ministral-parent --tasks gsm8k,humaneval --ar-tokens 512 --out /content/eval_out && python3 run_eval.py --arm ar:ministral:/content/adapters/ministral-ar --name ministral-ar-control --tasks gsm8k,humaneval --ar-tokens 512 --out /content/eval_out && echo ALLDONE",
+  "max_hours": 5.5
+}

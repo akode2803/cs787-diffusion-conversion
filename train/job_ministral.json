@@ -1,0 +1,7 @@
+{
+  "log": "/content/job.log",
+  "persist": "/content/persist/ar_ministral",
+  "drive": "cs787drive:CS787-Diffusion/runs/ministral-8b/ar-control",
+  "command": "python3 -m pip uninstall -y -q torchao; cd /content && python3 ar_control.py --model ministral --output-dir /content/ar_ministral --persist-dir /content/persist/ar_ministral --checkpoint-steps 2500 && echo ALLDONE",
+  "max_hours": 5
+}

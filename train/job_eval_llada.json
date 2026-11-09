@@ -1,0 +1,13 @@
+{
+  "log": "/content/job.log",
+  "drive": "cs787drive:CS787-Diffusion/eval/jobs/eval_llada",
+  "fetch": [],
+  "mirror": [
+    [
+      "/content/eval_out",
+      "cs787drive:CS787-Diffusion/eval/main"
+    ]
+  ],
+  "command": "python3 -m pip uninstall -y -q torchao; cd /content && python3 run_eval.py --arm llada --name llada --tasks gsm8k,mmlu,arc_c,humaneval,mbpp,he_single,he_multi --out /content/eval_out && echo ALLDONE",
+  "max_hours": 4
+}
