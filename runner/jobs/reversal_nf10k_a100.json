@@ -1,0 +1,14 @@
+{
+  "about": "Same as reversal_nf10k, on an A100 (no G4 free on 9-10 Nov). A100 speed and CU rate for this job are not measured: estimate 18 CU, capped at 1.75 h.",
+  "est_cu": 18,
+  "gpu": "A100",
+  "log": "/content/job.log",
+  "drive": "@DRIVE@/eval/jobs/eval_reversal_nf10k",
+  "fetch": [
+    ["@DRIVE@/runs/qwen2.5-7b/ar-control/best", "/content/adapters/qwen-ar"],
+    ["@DRIVE@/runs/qwen2.5-7b/byod-retrained/best", "/content/adapters/qwen-byod-retrained"]
+  ],
+  "mirror": [["/content/eval_out", "@DRIVE@/eval/reversal_nf10k/results"]],
+  "command": "python3 -m pip uninstall -y -q torchao; cd /content && DRIVE='@DRIVE@' UPDATES=10000 EPOCHS=40 TAG=nf10k FORMS=namefree SKIP_BASE=1 bash reversal_job.sh && echo ALLDONE",
+  "max_hours": 1.75
+}

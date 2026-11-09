@@ -22,6 +22,10 @@ template=runner/jobs/$name.json
 [ -f runner/local.env ] || { echo "MISSING runner/local.env (copy runner/local.env.example)"; exit 2; }
 source runner/local.env
 SESSION=${SESSION:-cs787-runner}; GPU=${GPU:-G4}; MIN_CU=${MIN_CU:-15}; COLAB=${COLAB:-colab}; MAX_RESTARTS=${MAX_RESTARTS:-2}
+# A job may name its own GPU ("gpu": "A100"), which overrides GPU from local.env. Added 10 Nov: no G4 was free for
+# hours, so request 005 runs the same job on an A100.
+job_gpu=$(python3 -c "import json;print(json.load(open('$template')).get('gpu', ''))")
+[ -n "$job_gpu" ] && GPU=$job_gpu
 [ -n "${DRIVE:-}" ] || { echo "DRIVE is not set in runner/local.env"; exit 2; }
 RCLONE_CONF=${RCLONE_CONF:-$(rclone config file 2>/dev/null | tail -1)}
 RCLONE_CONF=${RCLONE_CONF/#\~/$HOME}
