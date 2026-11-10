@@ -1,4 +1,4 @@
-# What does diffusion conversion buy? (CS787, Group 13, IIT Kanpur)
+# What does diffusion conversion buy? (CS787, IIT Kanpur)
 
 Code for a same-data AR-control study of BYOD's LoRA AR-to-diffusion conversion (Kuiper & Bagheri 2026, "BYOD:
 Build Your Own DLM", arXiv 2610.41574). Each converted model is compared with an autoregressive control trained on

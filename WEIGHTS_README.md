@@ -1,4 +1,4 @@
-# CS787 Group 13 — trained adapters
+# CS787 — trained adapters
 
 LoRA adapters from "What Does Diffusion Conversion Buy? A same-data controlled study of LoRA conversion from
 autoregressive to diffusion language models" (CS787 Generative AI, IIT Kanpur, November 2026).
