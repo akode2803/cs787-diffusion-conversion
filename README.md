@@ -16,7 +16,7 @@ the same data, with the same adapter and the same budget.
 
 ## Try the models
 
-Our trained LoRA adapters are public on Google Drive: **[weights folder](https://drive.google.com/drive/folders/1jO4kzt_AGTRXfoeZZ_4Wwri6ssLCZaYY)**. The folder holds:
+Our trained LoRA adapters are public on Google Drive: **[weights folder](https://drive.google.com/drive/folders/1yVh_LSR7i7sPPRZjECHNl1wOB88NTijv)**. The folder holds:
 - the Qwen2.5-7B conversion retrain;
 - the Qwen2.5-7B and Ministral-8B same-data AR controls;
 - the two reversal-test adapters.
