@@ -1,5 +1,9 @@
-"""Step-count and gap-length sweeps: reruns GSM8K/HumanEval at 32-256 diffusion steps and single-line infilling
-with 0.5x-2x the true gap length, so the speed-accuracy dial and the gap-length oracle can be measured."""
+"""Summarises the step-count and gap-length sweeps from saved results (no GPU): accuracy and seconds per example at
+32-256 diffusion steps, batch-1 latency against the AR arms, and single-line infilling with 0.5x-2x the true gap
+length, with paired differences.
+
+    python3 speed_gap.py RESULTS_DIR > speed_steps_gap.md
+"""
 import json, os, sys, statistics as st
 from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
