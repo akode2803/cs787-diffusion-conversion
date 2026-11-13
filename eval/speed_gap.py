@@ -1,3 +1,5 @@
+"""Step-count and gap-length sweeps: reruns GSM8K/HumanEval at 32-256 diffusion steps and single-line infilling
+with 0.5x-2x the true gap length, so the speed-accuracy dial and the gap-length oracle can be measured."""
 import json, os, sys, statistics as st
 from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
